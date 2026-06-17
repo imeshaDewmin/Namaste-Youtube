@@ -1,6 +1,43 @@
+import { useSelector } from "react-redux";
+
 const SideBar = () => {
+
+  const isMenuOpen = useSelector(store => store.app.isMenuOpen);
+
+  if (!isMenuOpen) return null;
+
   return (
-    <div>SideBar</div>
+    <div className="p-3 shadow-lg col-span-1">
+
+      <ul className="space-y-5 pb-4 cursor-pointer">
+        <li className="font-bold">🏠 Home</li>
+        <li>🎬 Shorts</li>
+      </ul>
+
+      <hr className="" />
+
+      <h1 className="font-bold pt-5">📺 Subscriptions</h1>
+
+      <ul className="space-y-5 pt-3 pb-4 cursor-pointer">
+        <li>🎵 Music</li>
+        <li>🏅 Sports</li>
+        <li>🎮 Gaming</li>
+        <li>🎬 Movies</li>
+      </ul>
+
+      <hr className="" />
+
+      <h1 className="font-bold pt-5">👤 You</h1>
+
+      <ul className="space-y-5 pt-3 cursor-pointer">
+        <li>📜 History</li>
+        <li>📂 Playlists</li>
+        <li>⏰ Watch Later</li>
+        <li>👍 Liked Videos</li>
+      </ul>
+
+    </div>
   )
 }
+
 export default SideBar;

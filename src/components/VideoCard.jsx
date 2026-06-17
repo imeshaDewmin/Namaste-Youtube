@@ -1,6 +1,6 @@
 const VideoCard = () => {
   return (
-    <div>VideoCard</div>
+    <div>VideoCards</div>
   )
 }
 export default VideoCard;
