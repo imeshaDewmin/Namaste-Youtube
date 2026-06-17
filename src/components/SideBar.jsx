@@ -18,7 +18,7 @@ const SideBar = () => {
 
       <h1 className="font-bold pt-5">📺 Subscriptions</h1>
 
-      <ul className="space-y-5 pt-3 pb-4 cursor-pointer">
+      <ul className="space-y-5 pt-4 pb-4 cursor-pointer">
         <li>🎵 Music</li>
         <li>🏅 Sports</li>
         <li>🎮 Gaming</li>
@@ -29,11 +29,12 @@ const SideBar = () => {
 
       <h1 className="font-bold pt-5">👤 You</h1>
 
-      <ul className="space-y-5 pt-3 cursor-pointer">
+      <ul className="space-y-5 pt-4 cursor-pointer">
         <li>📜 History</li>
         <li>📂 Playlists</li>
         <li>⏰ Watch Later</li>
         <li>👍 Liked Videos</li>
+        <li>📥 Downloads</li>
       </ul>
 
     </div>
