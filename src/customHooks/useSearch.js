@@ -1,23 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants"
-import { useDispatch } from "react-redux";
-import { showSuggestions } from "../redux/searchSlice";
 
 const useSearch = (query) => {
 
-    const dispatch = useDispatch();
+    const [suggestions, setSuggestions] = useState([]);
 
     const searchYouTube = async () => {
         const data = await fetch(`${YOUTUBE_SEARCH_API}${query}`)
         const json = await data.json();
 
-        dispatch(showSuggestions(json));
+        setSuggestions(json[1]);
 
     }
 
     useEffect(() => {
-        searchYouTube();
+        const timer = setTimeout(() => searchYouTube(), 200)
+
+        return () => {
+            clearTimeout(timer);
+        }
     }, [query])
+
+
+    return { suggestions };
 }
 
 export default useSearch;

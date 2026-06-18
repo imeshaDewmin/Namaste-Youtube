@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     MENU_ICON_URL,
     USER_ICON_URL,
@@ -6,19 +6,14 @@ import {
 } from "../utils/constants";
 
 import { toggleMenu } from "../redux/appSlice";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import useSearch from "../customHooks/useSearch";
 
 const Header = () => {
 
-    const suggestions = useSelector(store => store.search.suggestions);
-
     const dispatch = useDispatch();
 
-    const [query, setQuery] = useState("");
     const [inputText, setInputText] = useState("");
-
-    const timerRef = useRef(null);
 
     const handleToggleMenu = () => {
         dispatch(toggleMenu());
@@ -27,15 +22,9 @@ const Header = () => {
     const handleInputChange = (e) => {
         const value = e.target.value;
         setInputText(value);
-
-        clearTimeout(timerRef.current);
-
-        timerRef.current = setTimeout(() => {
-            setQuery(value);
-        }, 200);
     };
 
-    useSearch(query);
+    const { suggestions } = useSearch(inputText);
 
     return (
         <div className="grid grid-flow-col m-2 p-4 shadow-lg">
@@ -69,9 +58,9 @@ const Header = () => {
                     🔍︎
                 </button>
 
-                {suggestions?.[1]?.length > 0 && (
+                {suggestions?.length > 0 && (
                     <div className="absolute bg-white w-1/2 mx-auto left-0 right-0 border shadow-lg text-left">
-                        {suggestions?.[1]?.map((item, index) => (
+                        {suggestions?.map((item, index) => (
                             <div
                                 key={index}
                                 className="p-2 hover:bg-gray-200 cursor-pointer"
