@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants"
+import { useDispatch, useSelector } from "react-redux";
+import { cacheResults } from "../redux/searchSlice";
 
 const useSearch = (query) => {
+
+    const searchCache = useSelector(store => store.search);
+
+    const dispatch = useDispatch();
 
     const [suggestions, setSuggestions] = useState([]);
 
@@ -11,10 +17,20 @@ const useSearch = (query) => {
 
         setSuggestions(json[1]);
 
+        dispatch(cacheResults({
+            [query]: json[1]
+        }))
     }
 
     useEffect(() => {
-        const timer = setTimeout(() => searchYouTube(), 200)
+        const timer = setTimeout(() => {
+            if (searchCache[query]) {
+                setSuggestions(searchCache[query])
+            }
+            else {
+                searchYouTube();
+            }
+        }, 200)
 
         return () => {
             clearTimeout(timer);

@@ -14,6 +14,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const [inputText, setInputText] = useState("");
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     const handleToggleMenu = () => {
         dispatch(toggleMenu());
@@ -51,6 +52,8 @@ const Header = () => {
                     placeholder="Search"
                     value={inputText}
                     onChange={handleInputChange}
+                    onFocus={() => setShowSuggestions(true)}
+                    onBlur={() => setShowSuggestions(false)}
                 />
 
                 <button className="border border-gray-400 py-2 px-4 
@@ -58,8 +61,9 @@ const Header = () => {
                     🔍︎
                 </button>
 
-                {suggestions?.length > 0 && (
-                    <div className="absolute bg-white w-1/2 mx-auto left-0 right-0 border shadow-lg text-left">
+                {showSuggestions && (
+                    <div className="absolute bg-white w-1/2 mx-auto left-0 right-6 border border-gray-100
+                    rounded-lg shadow-lg text-left">
                         {suggestions?.map((item, index) => (
                             <div
                                 key={index}
