@@ -5,7 +5,7 @@ import { cacheResults } from "../redux/searchSlice";
 
 const useSearch = (query) => {
 
-    const searchCache = useSelector(store => store.search);
+    const searchCache = useSelector(store => store.search.cache);
 
     const dispatch = useDispatch();
 
@@ -23,6 +23,12 @@ const useSearch = (query) => {
     }
 
     useEffect(() => {
+
+        if (!query.trim()) {
+            setSuggestions([]);
+            return;
+        }
+
         const timer = setTimeout(() => {
             if (searchCache[query]) {
                 setSuggestions(searchCache[query])
@@ -35,7 +41,7 @@ const useSearch = (query) => {
         return () => {
             clearTimeout(timer);
         }
-    }, [query])
+    }, [query, searchCache])
 
 
     return { suggestions };
