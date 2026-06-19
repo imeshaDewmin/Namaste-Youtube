@@ -50,7 +50,7 @@ const LiveChat = () => {
 
     return (
         <>
-            <div className="ml-1 w-[450px] h-[500px] p-2 border border-black 
+            <div className="ml-0 sm:ml-1 w-full sm:w-[450px] h-[300px] sm:h-[500px] p-2 border border-black 
          bg-slate-200/50 rounded-lg flex flex-col-reverse gap-3 overflow-y-auto">
                 {chatData?.map((chat) =>
                     <CommentBox
@@ -61,10 +61,10 @@ const LiveChat = () => {
 
             <form className="flex"
                 onSubmit={(e) => e.preventDefault()}>
-                <input className="m-2 p-2 border w-[350px] rounded-md" type="text"
+                <input className="m-2 p-2 border w-full sm:w-[350px] rounded-md min-w-0" type="text"
                     placeholder="Enter message"
                     ref={message} />
-                <button className="m-2 p-2 rounded-md bg-red-100 "
+                <button className="m-2 p-2 rounded-md bg-red-100 shrink-0"
                     onClick={handleSendMessage}>
                     Send
                 </button>

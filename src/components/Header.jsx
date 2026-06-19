@@ -40,61 +40,66 @@ const Header = () => {
     }
 
     return (
-        <div className="grid grid-flow-col m-2 p-4 shadow-lg">
+        <div className="grid grid-cols-3 sm:grid-cols-[auto_1fr_auto] items-center m-2 p-2 sm:p-4 shadow-lg gap-2">
 
-            <div className="flex col-span-1">
+            <div className="flex items-center col-span-1">
                 <img
-                    className="h-7 cursor-pointer"
+                    className="h-6 sm:h-7 cursor-pointer"
                     alt="menu"
                     src={MENU_ICON_URL}
                     onClick={handleToggleMenu}
                 />
                 <img
-                    className="h-9 ml-2"
+                    className="h-7 sm:h-9 ml-2"
                     alt="ytLogo"
                     src={YOUTUBE_LOGO_URL}
                 />
             </div>
 
-            <div className="col-span-10 text-center relative">
+            <div className="col-span-2 sm:col-span-1 flex justify-center">
 
-                <input
-                    className="w-1/2 border border-gray-400 rounded-l-full p-2"
-                    type="text"
-                    placeholder="Search"
-                    value={inputText}
-                    onChange={handleInputChange}
-                    onFocus={() => setShowSuggestions(true)}
-                    onBlur={() => setShowSuggestions(false)}
-                />
+                <div className="relative flex w-full sm:w-1/2">
+                    <input
+                        className="flex-1 min-w-0 border border-gray-400 rounded-l-full p-1 sm:p-2 text-sm sm:text-base"
+                        type="text"
+                        placeholder="Search"
+                        value={inputText}
+                        onChange={handleInputChange}
+                        onFocus={() => setShowSuggestions(true)}
+                        onBlur={() => setShowSuggestions(false)}
+                    />
 
-                <button className="border border-gray-400 py-2 px-4 
-                rounded-r-full bg-black/40 font-bold text-white"
-                    onClick={handleSearch}>
-                    🔍︎
-                </button>
+                    <button
+                        className="border border-gray-400 py-1 px-2 sm:py-2 sm:px-4 
+                rounded-r-full bg-black/40 font-bold text-white text-sm sm:text-base shrink-0"
+                        onClick={handleSearch}
+                    >
+                        🔍︎
+                    </button>
 
-                {showSuggestions && (
-                    <div className="absolute bg-white w-1/2 mx-auto left-0 right-6 border border-gray-100
-                    rounded-lg shadow-lg text-left">
-                        {suggestions?.map((item, index) => (
-                            <div
-                                key={index}
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
-                                onMouseDown={() => {
-                                    setInputText(item)
-                                    setShowSuggestions(false)
-                                }}
-                            >
-                                {item}
-                            </div>
-                        ))}
-                    </div>
-                )}
+                    {showSuggestions && (
+                        <div className="absolute top-full left-0 w-full bg-white border border-gray-100
+            rounded-lg shadow-lg text-left z-10 mt-1">
+                            {suggestions?.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="p-2 hover:bg-gray-200 cursor-pointer text-sm sm:text-base"
+                                    onMouseDown={() => {
+                                        setInputText(item)
+                                        setShowSuggestions(false)
+                                    }}
+                                >
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
             </div>
 
-            <div className="col-span-1">
-                <img className="h-8" alt="userIcon" src={USER_ICON_URL} />
+            <div className="col-span-1 flex justify-end">
+                <img className="hidden md:inline-block h-7 sm:h-8" alt="userIcon" src={USER_ICON_URL} />
             </div>
 
         </div>
