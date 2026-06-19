@@ -2,7 +2,7 @@ import CommentBox from "./CommentBox";
 import { liveChatMock } from "../utils/mockLiveChat";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addChat } from "../redux/liveChatSlice";
+import { addChat, resetChat } from "../redux/liveChatSlice";
 
 const LiveChat = () => {
 
@@ -29,7 +29,10 @@ const LiveChat = () => {
             index++
         }, 1400)
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+            dispatch(resetChat());
+        }
     }, [dispatch])
 
     const handleSendMessage = () => {

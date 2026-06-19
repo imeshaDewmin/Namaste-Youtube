@@ -13,10 +13,13 @@ const liveChatSlice = createSlice({
             if (state.liveChats.length > OFFSET_LIVE_CHAT) {
                 state.liveChats.pop();
             }
+        },
+        resetChat: (state) => {
+            state.liveChats = [];
         }
     }
 });
 
-export const { addChat } = liveChatSlice.actions;
+export const { addChat, resetChat } = liveChatSlice.actions;
 
 export default liveChatSlice.reducer;
