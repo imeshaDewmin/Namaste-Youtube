@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import appReducer from "./appSlice";
 import videoReducer from "./videoSlice";
 import searchReducer from "./searchSlice";
+import liveChatReducer from "./liveChatSlice";
 
 const appStore = configureStore({
     reducer: {
         app: appReducer,
         videos: videoReducer,
-        search: searchReducer
+        search: searchReducer,
+        liveChat: liveChatReducer
     }
 })
 
